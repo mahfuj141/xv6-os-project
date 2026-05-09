@@ -142,10 +142,12 @@ UPROGS=\
 	$U/_grind\
 	$U/_wc\
 	$U/_zombie\
+	$U/_testcall\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\
-
+$U/_testpriority\
+    $U/_testproccount
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
 

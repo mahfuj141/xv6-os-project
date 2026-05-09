@@ -107,3 +107,18 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+uint64
+sys_getreadcount(void)
+{
+  return myproc()->readcount;
+}
+uint64
+sys_setpriority(void)
+{
+  int priority;
+  argint(0, &priority);           // just call it alone, no if()
+  if(priority < 0 || priority > 20)
+    return -1;
+  myproc()->priority = priority;
+  return 0;
+}
