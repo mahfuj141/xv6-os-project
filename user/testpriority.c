@@ -3,27 +3,28 @@
 #include "user/user.h"
 
 int main(void) {
-  int pid1, pid2, pid3;
-
   printf("=== Priority Scheduler Test ===\n");
 
-  pid1 = fork();
-  if(pid1 == 0) {
+  int pid1 = fork();
+  if(pid1 == 0){
     setpriority(15);
+    volatile int i; for(i=0;i<50000000;i++); // busy wait
     printf("Child 1 (priority=15, LOW): running\n");
     exit(0);
   }
 
-  pid2 = fork();
-  if(pid2 == 0) {
+  int pid2 = fork();
+  if(pid2 == 0){
     setpriority(2);
+    volatile int i; for(i=0;i<50000000;i++);
     printf("Child 2 (priority=2, HIGH): running\n");
     exit(0);
   }
 
-  pid3 = fork();
-  if(pid3 == 0) {
+  int pid3 = fork();
+  if(pid3 == 0){
     setpriority(8);
+    volatile int i; for(i=0;i<50000000;i++);
     printf("Child 3 (priority=8, MED): running\n");
     exit(0);
   }
